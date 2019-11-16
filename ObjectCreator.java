@@ -6,43 +6,55 @@ import java.io.*;
 import java.util.Scanner;
 
 
-public class ObjectCreator {
+public class ObjectCreator 
+{
 
     private static Scanner in = new Scanner(System.in);
 
-    //Creates and returns an instance of a simple primitive object
-    public PrimitiveObject createPrimitiveObject() {
-        System.out.println("Creating Primitive Object");
+    //Creates simple primitive object
+    public PrimitiveObject createPrimitiveObject() 
+    {
+        System.out.println("Creating Primitive Object\n");
+
+        //Initialize the object to null
         PrimitiveObject primObj = null;
 
-        try {
-            System.out.print("Setting primitive instance variables");
+        try 
+        {
 
-            //Integer primitive
+            //Set a value of your choosing for the integer
             System.out.println("Enter value for integer field");
-            handleInput(1);
             int intParam = in.nextInt();
 
-            //Float
+            //Set a value of your choosing for the float 
             System.out.println("Enter value of float field");
-            handleInput(2);
             float floatParam = in.nextFloat();
 
+            //send these values to the PrimitiveObject class where there is just a constructor to create the  object
             primObj = new PrimitiveObject(intParam, floatParam);
 
-        }catch(Exception e ) { e.printStackTrace(); }
-        
+        }
+        catch(Exception e) 
+        { 
+            e.printStackTrace(); 
+        }
+        System.out.println("Primitive Object Created!\n\n");
+       
         return primObj;
     }
     
-    //Creates and returns an instance of a reference object
-    public ReferenceObject createReferenceObject() {
-        System.out.println("Creating Reference Object");
-        ReferenceObject refObj = null;
 
-        //Creation of other objects at same time
+
+    //Create a reference object
+    public ReferenceObject createReferenceObject() 
+    {
+        System.out.println("Creating Reference Object");
+
+        //Creation of a primitive object at the same time that references this object
         PrimitiveObject primObj = createPrimitiveObject();
-        refObj = new ReferenceObject(primObj);
+        ReferenceObject refObj = new ReferenceObject(primObj);
+
+        System.out.println("Reference Object Created!\n\n");
 
         return refObj;
     } 
@@ -51,24 +63,30 @@ public class ObjectCreator {
     //Creates and returns a PrimitiveArray object 
     public PrimitiveArrayObject createPrimitiveArrayObject() {
         System.out.println("Creating PrimitiveArray Object");
-        PrimitiveArrayObject primArrayObject = null;
+
+        //Set intiial to null
+        PrimitiveArrayObject pArrayObject = null;
         
-        //Prompt user for array length 
+        //Set the size if the array
         System.out.println("Enter size of array:");
-        handleInput(1);
         int arrayLength = in.nextInt();
 
-        //Allow user to set the values of the array elements
-        String[] paramArray = new String[arrayLength];
-        System.out.println("Press enter after every complete entry");
 
-        for (int i = 0; i < paramArray.length; i++) {
+        //Allow user to set the values of the array elements. Changed to arraylength +1. Not sure if that fixed my original problem
+        String[] paramArray = new String[arrayLength+1];
+
+        for (int i = 0; i < paramArray.length; i++) 
+        {
             System.out.printf("Enter value for index %d:\n", i);
             paramArray[i] = in.nextLine();
         }
+        System.out.println(paramArray[0]);
 
-        primArrayObject = new PrimitiveArrayObject(paramArray);
-        return primArrayObject;
+        pArrayObject = new PrimitiveArrayObject(paramArray);
+
+        System.out.println("Primitive Array Object Created!\n\n");
+
+        return pArrayObject;
     }  
     
     //Creates and returns a ReferenceArray Object
@@ -76,25 +94,28 @@ public class ObjectCreator {
         System.out.println("Creating ReferenceArray Object");
         ReferenceArrayObject refArrayObject = null;
 
-        //Prompt user for array length 
+        //Set the size if the array
         System.out.println("Enter size of array:");
-        handleInput(1);
         int arrayLength = in.nextInt();
 
-        Object[] paramArray = new Object[arrayLength];
+
+        Object[] paramArray = new Object[arrayLength + 1];
 
         for (int i = 0; i < paramArray.length; i++) {
-            //Creation of primitive objects at same time
+            //Creation a primitive object at each index of the array created
             paramArray[i] = createPrimitiveObject();
         }
 
         refArrayObject = new ReferenceArrayObject(paramArray);
+        System.out.println("Reference Array Object Created!\n\n");
+
         return refArrayObject;
 
     }
     
     //Creates and returns a Collections Object
-    public CollectionObject createCollectionObject() {
+    public CollectionObject createCollectionObject() 
+    {
         System.out.println("Creating Collections Object");
         CollectionObject colObj = null;
 
@@ -103,46 +124,23 @@ public class ObjectCreator {
         boolean quit = false;
         String choice;
         while(!quit){
-            System.out.println("Add object to collections yes = 1 and no = 0");
-            //handleInput(3);
+            System.out.println("Add object to collections? Type 'yes' or 'no'");
+
+
             choice = in.nextLine();
             
-            if (choice.equals("0")) {
+            if (choice.equals("no")) 
+            {
                 quit = true;
             }
-            else if (!choice.equals("0")) {
+            else if (choice.equals("yes")) 
+            {
                 paramCollection.add(createPrimitiveObject());
             }
             in.nextLine();
         }
         colObj = new CollectionObject(paramCollection);
         return colObj;    
-    }
-
-    public static void handleInput(int mode) {
-        switch (mode) {
-            case 1 : {
-                while (!in.hasNextInt()) {
-                    in.next();
-                    System.out.println("Invalid value for int field");
-                }
-                break;
-            }
-            case 2 : {
-                while (!in.hasNextFloat()) {
-                    in.next();
-                    System.out.println("Invalid value for float field");
-                }
-                break;
-            }
-            case 3 : {
-                while (!in.hasNextInt() && ((in.nextLine().equals("0")) || (in.nextLine().equals("1")))) {
-                    System.out.println("Invalid choice, 0 = don't add to collection, 1 = add to collection");
-                    in.next();
-                }
-                break;
-            }
-        } 
     }
     
  }

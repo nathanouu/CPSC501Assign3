@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialized>
+  <object class="CollectionObject" id="0">
+    <field name="objectCollectionField" declaringclass="CollectionObject">
+      <reference>1</reference>
+    </field>
+  </object>
+  <object class="java.util.Vector" id="1">
+    <field name="elementData" declaringclass="java.util.Vector">
+      <reference>2</reference>
+    </field>
+    <field name="elementCount" declaringclass="java.util.Vector">
+      <value>2</value>
+    </field>
+    <field name="capacityIncrement" declaringclass="java.util.Vector">
+      <value>0</value>
+    </field>
+    <field name="serialVersionUID" declaringclass="java.util.Vector">
+      <value>-2767605614048989439</value>
+    </field>
+    <field name="MAX_ARRAY_SIZE" declaringclass="java.util.Vector">
+      <value>2147483639</value>
+    </field>
+  </object>
+  <object class="[Ljava.lang.Object;" id="2" Length="10" />
+  <object class="PrimitiveObject" id="3">
+    <field name="intField" declaringclass="PrimitiveObject">
+      <value>1</value>
+    </field>
+    <field name="floatField" declaringclass="PrimitiveObject">
+      <value>1.0</value>
+    </field>
+  </object>
+  <object class="PrimitiveObject" id="4">
+    <field name="intField" declaringclass="PrimitiveObject">
+      <value>1</value>
+    </field>
+    <field name="floatField" declaringclass="PrimitiveObject">
+      <value>1.0</value>
+    </field>
+  </object>
+</serialized>
